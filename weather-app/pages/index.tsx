@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { getWeatherData } from '../pages/api/hello';
 import WeatherData from '../pages/api/types';
+import { WiDaySunny, WiCloudy, WiRain, WiSnow, WiFog, WiThunderstorm } from 'react-icons/wi';
+
 
 export default function Home() {
   const [city, setCity] = useState(''); // State to manage user input
@@ -20,8 +22,51 @@ export default function Home() {
     }
   };
 
+  const getWeatherIcon = (icon: string, size: number = 30) => {
+    return (
+      <span style={{ fontSize: `${size}px`, marginRight: '5px' }}>
+        {getIconComponent(icon)}
+      </span>
+    );
+  };
+
+  const getIconComponent = (icon: string) => {
+    switch (icon) {
+      case '01d':
+        return <WiDaySunny />;
+      case '01n':
+        return <WiDaySunny />;
+      case '02d':
+        return <WiCloudy />;
+      case '02n':
+        return <WiCloudy />;
+      case '03d':
+      case '03n':
+      case '04d':
+      case '04n':
+        return <WiCloudy />;
+      case '09d':
+      case '09n':
+        return <WiRain />;
+      case '10d':
+      case '10n':
+        return <WiRain />;
+      case '11d':
+      case '11n':
+        return <WiThunderstorm />;
+      case '13d':
+      case '13n':
+        return <WiSnow />;
+      case '50d':
+      case '50n':
+        return <WiFog />;
+      default:
+        return null; // No specific icon for other conditions
+    }
+  };
+
   return (
-    <div>
+    <div className='flex flex-col align-center justify-center text-xl'>
       <h1>Weather App</h1>
       <input
         type="text"
@@ -36,7 +81,7 @@ export default function Home() {
           <p>Description: {weatherData.weather[0].description}</p>
           <p>Temperature: {weatherData.main.temp}°C</p>
           <p>Humidity: {weatherData.main.humidity}%</p>
-          <p>{weatherData.weather[0].icon}</p>
+          {weatherData.weather[0].icon && getWeatherIcon(weatherData.weather[0].icon, 40)}
         </div>
       )}
     </div>
