@@ -6,7 +6,7 @@ interface Translations {
     temperature: string;
     humidity: string;
     // Add more keys as needed
-  }
+}
 
-  export default Translations;
+export default Translations;
   
