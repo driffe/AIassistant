@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { getWeatherData } from '../pages/api/hello';
 import WeatherData from '../pages/api/types';
 import Translations from '../pages/api/translation'

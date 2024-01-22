@@ -105,7 +105,7 @@ const getWeatherDescription = (weatherCode: number): string => {
       case 802:
         return '드문드문 구름이 낀 하늘';
       case 803:
-        return '구름이 거의 없는 하늘';
+        return '대부분 구름';
       case 804:
         return '구름으로 뒤덮인 흐린 하늘';
       case 900:

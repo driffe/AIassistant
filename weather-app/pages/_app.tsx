@@ -1,6 +1,20 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import '../styles/globals.css';
+import { AppProps } from 'next/app';
+import { useEffect, useState } from 'react';
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+function MyApp({ Component, pageProps }: AppProps) {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Apply dark mode styles to the entire body
+    document.body.classList.toggle('dark-mode', isDarkMode);
+  }, [isDarkMode]);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  return <Component {...pageProps} toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />;
 }
+
+export default MyApp;
