@@ -5,6 +5,7 @@ interface Translations {
     description: string;
     temperature: string;
     humidity: string;
+    feels_like: string;
     // Add more keys as needed
 }
 

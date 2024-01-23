@@ -13,6 +13,7 @@ const translations: Record<string, Translations> = {
     description: 'Description',
     temperature: 'Temperature',
     humidity: 'Humidity',
+    feels_like: 'Feels-Like'
   },
   kr: {
     searchPlaceholder: '도시 찾기',
@@ -21,6 +22,7 @@ const translations: Record<string, Translations> = {
     description: '상세',
     temperature: '온도',
     humidity: '습도',
+    feels_like: '체감온도'
   }
 };
 
@@ -81,6 +83,7 @@ export default function Home() {
           </div>
           <p className="mb-2">{t('description')}: {language === 'en' ? weatherData.weather[0].description : getWeatherDescription(weatherData.weather[0].id)}</p>
           <p className="mb-2">{t('temperature')}: {Math.round(weatherData.main.temp)}°C</p>
+          <p className="mb-2">{t('feels_like')}: {Math.round(weatherData.main.feels_like)}°C</p>
           <p>{t('humidity')}: {weatherData.main.humidity}%</p>
         </div>
       )}
