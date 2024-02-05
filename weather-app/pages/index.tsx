@@ -34,6 +34,7 @@ const translations: Record<string, Translations> = {
 export default function Home() {
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const [translatedCity, setTranslatedCity] = useState<string>(''); // Add state to store translated city
   const [error, setError] = useState<string | null>(null);
   const [language, setLanguage] = useState('en');
   const t = (key: keyof Translations) => translations[language][key];
