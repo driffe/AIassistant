@@ -4,6 +4,7 @@ import WeatherData from '../pages/api/types';
 import Translations from '../pages/api/translation'
 import getWeatherDescription from './cases/despription_kr'
 import getWeatherIcon from './cases/icon';
+import getClothingRecommendation from './cases/recommendation';
 
 const translations: Record<string, Translations> = {
   en: {
@@ -13,7 +14,9 @@ const translations: Record<string, Translations> = {
     description: 'Description',
     temperature: 'Temperature',
     humidity: 'Humidity',
-    feels_like: 'Feels-Like'
+    feels_like: 'Feels-Like',
+    cloth_Recommed: 'Cloth Recommend',
+    error1: 'Error: Invalid city. Please enter a valid city name.'
   },
   kr: {
     searchPlaceholder: '도시 찾기',
@@ -22,7 +25,9 @@ const translations: Record<string, Translations> = {
     description: '상세',
     temperature: '온도',
     humidity: '습도',
-    feels_like: '체감온도'
+    feels_like: '체감온도',
+    cloth_Recommed: '옷 추천',
+    error1: '에러: 유효하지 않은 도시입니다'
   }
 };
 
@@ -31,6 +36,8 @@ export default function Home() {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [language, setLanguage] = useState('en');
+  const t = (key: keyof Translations) => translations[language][key];
+
 
   const handleSearch = async () => {
     try {
@@ -42,7 +49,7 @@ export default function Home() {
         setError(null);
       }
     } catch (error: any) {
-      setError(error.message || 'Error fetching weather data. Please try again.');
+      setError(error.message || t('error1'));
     }
   };
 
@@ -51,9 +58,17 @@ export default function Home() {
     setLanguage((prevLanguage) => (prevLanguage === 'en' ? 'kr' : 'en'));
   };
 
-  const t = (key: keyof Translations) => translations[language][key];
-
-
+  const clothRecommendation  =  () => {
+    try {
+      if (weatherData?.main?.feels_like) {
+        const feelTemp = Math.round(weatherData.main.feels_like);
+        const recommendation = getClothingRecommendation(feelTemp);
+        return recommendation;
+      }
+    } catch (error: any) {
+      setError(error.message || 'Error: Unable to fetch clothing data. Please try again.');
+    }
+  }
 
   return (
     <main className='flex flex-col items-center justify-center text-xl h-screen bg-gray-200 text-gray-800'>
@@ -84,7 +99,8 @@ export default function Home() {
           <p className="mb-2">{t('description')}: {language === 'en' ? weatherData.weather[0].description : getWeatherDescription(weatherData.weather[0].id)}</p>
           <p className="mb-2">{t('temperature')}: {Math.round(weatherData.main.temp)}°C</p>
           <p className="mb-2">{t('feels_like')}: {Math.round(weatherData.main.feels_like)}°C</p>
-          <p>{t('humidity')}: {weatherData.main.humidity}%</p>
+          <p className="mb-2">{t('humidity')}: {weatherData.main.humidity}%</p>
+          <p>{t('cloth_Recommed')}: {clothRecommendation()}</p>
         </div>
       )}
       {error && <p className="mt-4 text-red-500">{error}</p>}

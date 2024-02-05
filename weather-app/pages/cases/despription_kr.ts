@@ -39,7 +39,7 @@ const getWeatherDescription = (weatherCode: number): string => {
       case 321:
         return '소나기';
       case 500:
-        return '악한 비';
+        return '약한 비';
       case 501:
         return '중간 비';
       case 502:

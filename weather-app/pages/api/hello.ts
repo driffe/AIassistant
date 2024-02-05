@@ -21,6 +21,6 @@ export const getWeatherData = async (city: string): Promise<WeatherData> => {
     console.error('Error fetching weather data:', error);
 
     // You might want to throw the error again to let the component handle it
-    throw error;
+    throw "error";
   }
 };
