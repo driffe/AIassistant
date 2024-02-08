@@ -1,6 +1,5 @@
 interface Translations {
     searchPlaceholder: string;
-    searchButtonText: string;
     weather: string;
     description: string;
     temperature: string;
