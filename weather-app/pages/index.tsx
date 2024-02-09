@@ -34,6 +34,7 @@ const translations: Record<string, Translations> = {
 export default function Home() {
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const [isCardFlipped, setIsCardFlipped] = useState(false);
   const [translatedCity, setTranslatedCity] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [language, setLanguage] = useState('en');
@@ -95,24 +96,27 @@ export default function Home() {
         </button>
       </div>
       {weatherData && (
-        <div className='mt-4 m-4 p-6 bg-white shadow-lg rounded-md'>
-          <div className='flex flex-row justify-center items-center'>
-            <p className='text-2xl'>{t('weather')}</p>
-            <p>{getWeatherIcon(weatherData.weather[0].icon, 70)}</p>
+        <div className={`flip-card ${isCardFlipped ? 'flipped' : ''}`} onClick={() => setIsCardFlipped(!isCardFlipped)}>
+          <div className='flip-card-inner'>
+            <div className='flip-card-front '>
+              <p>{getWeatherIcon(weatherData.weather[0].icon, 70)}</p>
+              <p className='mb-2'>
+                {t('temperature')}: {Math.round(weatherData.main.temp)}°C
+              </p>
+            </div>
+            <div className='flip-card-back'>
+              <p className='mb-2'>
+                {t('description')}: {language === 'en' ? weatherData.weather[0].description : getWeatherDescription(weatherData.weather[0].id)}
+              </p>
+              <p className='mb-2'>
+                {t('feels_like')}: {Math.round(weatherData.main.feels_like)}°C
+              </p>
+              <p className='mb-2'>
+                {t('humidity')}: {weatherData.main.humidity}%
+              </p>
+              <p>{t('cloth_Recommed')}: {clothRecommendation()}</p>
+            </div>
           </div>
-          <p className='mb-2'>
-            {t('description')}: {language === 'en' ? weatherData.weather[0].description : getWeatherDescription(weatherData.weather[0].id)}
-          </p>
-          <p className='mb-2'>
-            {t('temperature')}: {Math.round(weatherData.main.temp)}°C
-          </p>
-          <p className='mb-2'>
-            {t('feels_like')}: {Math.round(weatherData.main.feels_like)}°C
-          </p>
-          <p className='mb-2'>
-            {t('humidity')}: {weatherData.main.humidity}%
-          </p>
-          <p>{t('cloth_Recommed')}: {clothRecommendation()}</p>
         </div>
       )}
       {error && <p className='mt-4 text-red-500'>{error}</p>}
