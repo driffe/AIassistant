@@ -1,10 +1,11 @@
-# Weather app
-### Site
-[Demo](https://weather-app-eight-fawn-99.vercel.app/)
+# Weather App
+
+## Demo
+[Check out the demo here](https://weather-app-eight-fawn-99.vercel.app/)
 
 ## About the Project
 
-Simple weather app using PWA(Progressive Web Application) and OpenWeatherMap API. You can download and use it. 
+This is a simple weather app utilizing Progressive Web Application (PWA) principles and the OpenWeatherMap API. Feel free to download and use it.
 
 ### Built With
 
@@ -13,10 +14,9 @@ Simple weather app using PWA(Progressive Web Application) and OpenWeatherMap API
 * ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
 * ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
-
 ## Getting Started
 
-To get a local copy up and running follow these simple example steps.
+To get a local copy up and running, follow these simple steps.
 
 ### Prerequisites
 
