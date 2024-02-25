@@ -16,7 +16,7 @@ const translations: Record<string, Translations> = {
     temperature: 'Temperature',
     humidity: 'Humidity',
     feels_like: 'Feels-Like',
-    cloth_Recommed: 'Cloth Recommend',
+    cloth_Recommed: 'Cloth Rec',
     error1: 'Error: Invalid city. Please enter a valid city name.',
   },
   kr: {
@@ -61,7 +61,7 @@ export default function Home() {
     try {
       if (weatherData?.main?.feels_like) {
         const feelTemp = Math.round(weatherData.main.feels_like);
-        const recommendation = getClothingRecommendation(feelTemp);
+        const recommendation = getClothingRecommendation(feelTemp, language);
         return recommendation;
       }
     } catch (error: any) {
@@ -99,7 +99,7 @@ export default function Home() {
         <div className={`flip-card ${isCardFlipped ? 'flipped' : ''}`} onClick={() => setIsCardFlipped(!isCardFlipped)}>
           <div className='flip-card-inner'>
             <div className='flip-card-front '>
-              <p>{getWeatherIcon(weatherData.weather[0].icon, 70)}</p>
+              <p>{getWeatherIcon(weatherData.weather[0].icon, 100)}</p>
               <p className='mb-2'>
                 {t('temperature')}: {Math.round(weatherData.main.temp)}°C
               </p>
