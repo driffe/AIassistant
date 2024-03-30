@@ -7,13 +7,13 @@ function getClothingRecommendation(feelLikeTemperature: number, language: string
       moreHoodies: 'More Hoodies',
       fleeceHoodie: 'Fleece Hoodie Day',
       bestHoodie: 'Hoodie is the best',
-      tShirtDay: 'T-Shirt Day',
+      tShirt: 'T-Shirt Day',
     },
     kr: {
       moreHoodies: '후드티로는 부족해',
       fleeceHoodie: '기모후드티 날씨',
       bestHoodie: '후드티 날씨',
-      tShirtDay: '티셔츠 날씨',
+      tShirt: '티셔츠 날씨',
     },
     // Add more languages as needed
   };
@@ -26,7 +26,7 @@ function getClothingRecommendation(feelLikeTemperature: number, language: string
   } else if (feelLikeTemperature < 20) {
     return t('bestHoodie');
   } else {
-    return t('tShirtDay');
+    return t('tShirt');
   }
 }
 
